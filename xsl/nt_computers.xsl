@@ -11,14 +11,14 @@
 							Name:
 							<xsl:value-of select="@networkname" />
 							<br />
-							OC:
+							OS:
 							<xsl:value-of select="software/item/title" />
 							<br />
 							Service pack installed:
 							<xsl:choose>
-								<xsl:when test="software/item[@type = 'oc']/servicepacks/servicepack[last()] != ''">
+								<xsl:when test="software/item/servicepacks">
 								<xsl:value-of
-										select="software/item[@type = 'oc']/servicepacks/servicepack[last()]/@name" />
+										select="software/item/servicepacks/servicepack[last()]/@name" />
 									
 								</xsl:when>
 								<xsl:otherwise>
