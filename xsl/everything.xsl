@@ -112,7 +112,30 @@
 
 			<td>
 				<xsl:for-each select="software/node()">
-					<xsl:value-of select="current()" />
+					<p>
+						<xsl:value-of select="@type" />
+						<xsl:value-of select="." />
+
+						<xsl:for-each select="servicepacks/node()">
+							<xsl:choose>
+								<xsl:when test="@type">
+									<xsl:value-of select="name() " />
+									<br />
+									<xsl:value-of select="@name " />
+									<br />
+									<xsl:value-of select="@type" />
+
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="name() " />
+									<br />
+									<xsl:value-of select="@name " />
+								</xsl:otherwise>
+							</xsl:choose>
+
+						</xsl:for-each>
+					</p>
+
 				</xsl:for-each>
 
 			</td>
