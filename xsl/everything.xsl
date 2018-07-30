@@ -97,8 +97,30 @@
 			</td>
 			<td>
 				<xsl:for-each select="software/node()">
-					<xsl:value-of select="." />
-					<br />
+					<p>
+					<xsl:text>
+						<xsl:value-of select="@type" />
+						<xsl:value-of select="." />
+						<xsl:for-each select="servicepacks/node()">
+							<xsl:if test="name() = 'servicepack'">														
+								<xsl:choose>								
+									<xsl:when test="@type">
+									<xsl:value-of select="name()" />
+								:
+										<xsl:value-of select="@name" />
+										/
+										<xsl:value-of select="@type" />; 
+									</xsl:when>
+									<xsl:otherwise>
+									<xsl:value-of select="name()" />
+								:
+										<xsl:value-of select="@name" />; 
+									</xsl:otherwise>
+								</xsl:choose>								
+							</xsl:if>
+						</xsl:for-each>
+						</xsl:text>
+					</p>
 				</xsl:for-each>
 			</td>
 		</tr>
