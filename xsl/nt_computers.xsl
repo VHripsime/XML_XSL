@@ -4,7 +4,8 @@
 	<xsl:template match="/">
 		<html>
 			<body>
-
+<xsl:for-each select="equipment/computers/computer">
+</xsl:for-each>
 			</body>
 		</html>
 	</xsl:template>
