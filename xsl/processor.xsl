@@ -10,8 +10,29 @@
 						<th style="text-align:left">Processor type</th>
 						<th style="text-align:left">Amount of computers</th>
 					</tr>
+
+					<xsl:apply-templates select="// hardware" />
 				</table>
 			</body>
 		</html>
+	</xsl:template>
+
+	<xsl:template match="hardware">
+
+		<xsl:for-each select="//hardware[@cup = 'Pentium2']">
+
+			<tr>
+				<td>
+					<xsl:value-of select="position()" />
+				</td>
+				<td>
+					<xsl:value-of select="@type"/>
+				</td>
+				
+			</tr>
+		</xsl:for-each>
+
+
+
 	</xsl:template>
 </xsl:stylesheet>						

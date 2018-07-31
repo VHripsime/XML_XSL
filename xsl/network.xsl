@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	
 	<xsl:template match="/">
 		<html>
 			<body>
@@ -14,13 +14,11 @@
 						<th style="text-align:left">IP address</th>
 						<th style="text-align:left">Location</th>
 					</tr>
-					<xsl:apply-templates select="//hub | // commutator | //router" >
-					<xsl:sort select="type"></xsl:sort>
+					
+					<xsl:apply-templates select="//hub | // commutator | //router">
+						<xsl:sort select="type"></xsl:sort>
 					</xsl:apply-templates>
 					
-					
-												
-	
 				</table>
 			</body>
 		</html>
