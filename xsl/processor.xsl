@@ -8,19 +8,23 @@
 					<tr>
 						<th>#</th>
 						<th>Processor type</th>
-						<th>Amount of computers</th>						
+						<th>Amount of computers</th>
 					</tr>
 					<tr>
 						<td>1</td>
 						<td>Pentuim2</td>
-						<td><xsl:value-of select="count('cpu@type=Pentium2')"/></td>
+						<td><xsl:value-of select="count(//cpu[@type = 'Pentium2'])"/></td>
 					</tr>
 					<tr>
-						<td>2</td>
+						<td>2</td>							
 						<td>Pentium3</td>
-						<td><xsl:value-of select="count('cpu@type=Pentium3')"/></td>
+						<td><xsl:value-of select="count(//cpu[@type = 'Pentium3'])"/></td>
 					</tr>
-					
+					<tr>
+						<td>3</td>							
+						<td>Other types</td>
+						<td><xsl:value-of select="count(//cpu[@type != 'Pentium3' and @type != 'Pentium2'])"/></td>
+					</tr>
 				</table>
 			</body>
 		</html>
