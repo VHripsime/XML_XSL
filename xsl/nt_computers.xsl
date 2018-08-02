@@ -23,10 +23,10 @@
 					Service pack installed:
 					<xsl:choose>
 						<xsl:when test="//servicepack[last()]/@type">
-							<xsl:value-of select="item/servicepacks/servicepack[last()]/@type" />	
-						/
+							<xsl:value-of select="item/servicepacks/servicepack[last()]/@type" />
+							/
 							<xsl:value-of select="item/servicepacks/servicepack[last()]/@name" />
-							</xsl:when>
+						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="item/servicepacks/servicepack[last()]/@name" />
 						</xsl:otherwise>
