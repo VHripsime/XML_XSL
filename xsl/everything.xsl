@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- In this task we create tables and put into about computer parameters, 
-		Network equipment and Peripherals -->
+	Network equipment and Peripherals -->
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:template match="/">
@@ -55,7 +55,7 @@
 			</body>
 		</html>
 	</xsl:template>
-<!--  Computers -->
+	<!-- Computers -->
 	<xsl:template match="computer">
 		<tr>
 			<td>
@@ -85,9 +85,8 @@
 					<xsl:value-of select="hardware/soundcard" />
 				</xsl:if>
 				<xsl:if test="//drive">
-					<h5>drives:</h5>
 					<xsl:if test="hardware/drives/drive/@type = 'floppy'">
-
+						<h5>drives:</h5>
 						<xsl:value-of select="hardware/drives/drive/@type" />
 						\
 						<xsl:value-of select="hardware/drives/drive/@formfactor" />
@@ -136,7 +135,7 @@
 		</tr>
 
 	</xsl:template>
-<!--  Network -->
+	<!-- Network -->
 	<xsl:template match="hub | commutator | router">
 		<tr>
 			<td>
@@ -182,7 +181,7 @@
 		</tr>
 	</xsl:template>
 
-<!-- Peripherals -->
+	<!-- Peripherals -->
 	<xsl:template match="printer| scanner | copier">
 
 		<tr>
