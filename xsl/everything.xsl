@@ -88,6 +88,7 @@
 			</td>
 			<td>
 				<xsl:for-each select="software/node()">
+				<xsl:value-of select="@type"/> /
 					<xsl:value-of select="." />
 					<br />
 				</xsl:for-each>
