@@ -79,7 +79,10 @@
 				<xsl:value-of select="hardware/ram/@amount" />
 				\
 				<xsl:value-of select="hardware/ram/@type" />
-
+				
+				<h5>Storage</h5>
+				<xsl:value-of select="hardware/storage/@space" />
+				
 				<xsl:if test="hardware/soundcard">
 					<h5>Soundcard:</h5>
 					<xsl:value-of select="hardware/soundcard" />

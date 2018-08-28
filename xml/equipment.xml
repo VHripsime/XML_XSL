@@ -78,7 +78,7 @@
 					<title>Windows NT Server 4.0</title>
 					<vendor>Microsoft</vendor>
 					<servicepacks>
-						<servicepack aaa="SP4"/>
+						<servicepack name="SP4"/>
 					</servicepacks>
 				</item>
 				<item type="antivirus">
