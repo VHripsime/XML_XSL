@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<xsl:stylesheet version="1.0"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <xsl:template match="equipment">
 
@@ -30,12 +29,12 @@
                         <xsl:value-of select="port" />
                     </td>
                     
-                    <xsl:choose>
+                    <xsl:choose>                       
                         <xsl:when test="ip">
                             <td> <xsl:value-of select="ip" /> </td>
                         </xsl:when>
                         <xsl:otherwise>
-                            <td align="center"> N/A </td>
+                            <td align="center"> N/A </td>                      
                         </xsl:otherwise>
                     </xsl:choose>
                     
@@ -46,7 +45,7 @@
             </xsl:for-each>
 
         </table>
-
     </xsl:template>
+       
 
 </xsl:stylesheet>
