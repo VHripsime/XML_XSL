@@ -1,39 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
+<!-- <xsl:import href=""/> -->
 <xsl:template match="/">
   <html>
   <body>
   <h2>Network equipment</h2>
-  <xsl:apply-templates/>
   
+    <table border = "1">   
+               <tr bgcolor = "#DCDCDC">   
+                  <th>#</th>   
+                  <th>Name</th>   
+                  <th>Type</th>   
+                  <th>Port number</th>   
+                  <th>IP address</th> 
+                  <th>Location</th>  
+               </tr>   
+  
+  <xsl:apply-templates select='network'/>
+     
+</table>
+</body>
+</html>
+
+</xsl:template>
 
 
-<table border="1">
 
-<xsl:template match="head">
+<xsl:template match="network">
   <tr>
-    <td><xsl:apply-templates select="Number"/></td>
-    <td><xsl:apply-templates select="Name"/></td>
-    <td><xsl:apply-templates select="Type"/></td>
-    <td><xsl:apply-templates select="Port number"/></td>
-    <td><xsl:apply-templates select="IP address"/></td>
-    <td><xsl:apply-templates select="Location"/></td>
+    <!-- <td><xsl:apply-templates select="Number"/></td> -->
+    
+    <td>1</td>
+    <td><xsl:value-of select="hubs/hub/type"/></td>
+    <td>hub</td>
+    <td><xsl:value-of select="hubs/hub/port"/></td>
+    <td>N/A</td>
+    <td><xsl:value-of select="location"/></td>
   </tr>  
 </xsl:template>
 
 
-<xsl:template match="Number">
- <td>  
-   <xsl:value-of select="."/>
- </td>
+
+
+<xsl:template match="type">
+   <td> <xsl:apply-templates /> </td>
 </xsl:template>
 
 
-<xsl:template match="Name">
+
+
+<!-- <xsl:template match="type">
+ <td>  
+   <xsl:value-of select="."/>   
+ </td>
+</xsl:template> -->
+
+
+<xsl:template match="hubs">
  <td>
-   <xsl:value-of select="."/>
+   <xsl:apply-templates />
    </td>
 </xsl:template>
 
@@ -46,7 +72,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 
 
-<xsl:template match="Port number">
+<xsl:template match="Port_number">
  <td>
    <xsl:value-of select="."/>
  </td>
@@ -54,7 +80,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
  
 
 
-<xsl:template match="IP address">
+<xsl:template match="IP_address">
  <td>
    <xsl:value-of select="."/>
  </td>
@@ -66,14 +92,6 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
  <td>
    <xsl:value-of select="."/>
   </td> 
-</xsl:template>
-
-
-</table>
-
-</body>
-</html>
-
 </xsl:template>
 
 </xsl:stylesheet>
