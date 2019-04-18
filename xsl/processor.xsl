@@ -10,44 +10,59 @@
 		</html>
 	</xsl:template>
 
-	<xsl:variable name="processorTypes" as="element()*">
-		<Item>Pentium2</Item>
-		<Item>Pentium3</Item>
-		<Item>Other</Item>
+
+	<xsl:variable name="processorTypes">
+		<item>Pentium2</item>
+		<item>Pentium3</item>
+		<item>Other</item>
 	</xsl:variable>
 
+	<xsl:param name="elements"
+		select="document('')/*/xsl:variable[@name='processorTypes']/*" />
+	<xsl:param name="elementsLength" select="$elements" />
+	<xsl:param name="startIndex" select="1" />
+	<xsl:param name="nextIndex" select="10" />
 
 	<xsl:template match='equipment'>
-		<table border='1' cellpadding="4">
+		<table border='1'>
 			<tr>
 				<th>#</th>
 				<th>Processor type</th>
 				<th>Amount of computers</th>
 			</tr>
 
-			<xsl:for-each select="computers/computer">
-				<tr>
-					<td>
-						<!-- <xsl:number value="position()" /> -->
-						<xsl:value-of select='$processorTypes[0]' />
-					</td>
-					<td>
-						<xsl:value-of select='$processorTypes[1]' />
-					</td>
-					<td>
-						
-						<xsl:value-of select='$processorTypes[2]' />
-					</td>
-				</tr>
-			</xsl:for-each>
+			<tr>
+				<td>
+					<xsl:number value="position()" />
+				</td>
+				<td>
+					length
+				</td>
+				<td>
+					<xsl:value-of select="$elementsLength" />
+					<!-- <xsl:apply-templates select="computers"> <xsl:with-param name="processor" 
+						select="$elements[1]" /> </xsl:apply-templates> -->
+				</td>
+			</tr>
 
+			<!-- <tr> <td> <xsl:number value="position()" /> </td> <td> <xsl:value-of 
+				select="$elements[2]" /> </td> <td> <xsl:apply-templates select="computers"> 
+				<xsl:with-param name="processor" select="$elements[2]" /> </xsl:apply-templates> 
+				</td> </tr> -->
 		</table>
 	</xsl:template>
 
 
-	<xsl:template match='hardware'>
+	<xsl:template match='computers'>
 		<xsl:param name="processor" />
-		<xsl:value-of select="count(cpu[@type=$processor])" />
+		<xsl:value-of
+			select="count(computer/hardware/cpu[@type=$processor])" />
 	</xsl:template>
+
+
+	<!-- <xsl:template name="repeatable"> <xsl:param name="index" select="1" 
+		/> <xsl:param name="total" select="10" /> Do something <xsl:if test="not($index 
+		= $total)"> <xsl:call-template name="repeatable"> <xsl:with-param name="index" 
+		select="$index + 1" /> </xsl:call-template> </xsl:if> </xsl:template> -->
 
 </xsl:stylesheet>
