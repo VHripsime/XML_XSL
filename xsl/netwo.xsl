@@ -3,11 +3,11 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<xsl:template match="/">
-		<HTML>
-			<BODY>
+		<html>
+			<body>
 				<h2>Network equipment</h2>
 
-				<table border="1">
+				<table border="1" cellspacing="0" cellpadding="2">
 					<tr bgcolor="#DCDCDC">
 						<th>#</th>
 						<th>Name</th>
@@ -17,39 +17,51 @@
 						<th>Location</th>
 					</tr>
 
-					<xsl:apply-templates select='network' />
+					<xsl:apply-templates />
 
 				</table>
-			</BODY>
-		</HTML>
+			</body>
+		</html>
 	</xsl:template>
 
 
-
-
-	<xsl:template match="network">
-		<TR>
-			<td>
-				<xsl:apply-templates select="hubs/type" />
-			</td>
-
-			<!-- <xsl:apply-templates select="hubs" /> -->
-
-			<!-- <xsl:apply-templates select="hubs/port" /> -->
-			<!-- <xsl:apply-templates select="ip" /> <xsl:apply-templates select="location"/> -->
-		</TR>
+	<xsl:template match='equipment'>
+		<xsl:for-each select="network/*/*">
+			<tr>
+				<td>
+					<xsl:value-of select="position()" />
+				</td>
+				
+				<td>
+					<xsl:value-of select="type" />
+				</td>
+				
+				<td>
+					<xsl:value-of select="name()" />
+				</td>
+				
+				<td>
+					<xsl:value-of select="port" />
+				</td>
+				
+				<td>
+					<xsl:choose>
+						<xsl:when test="ip">
+							<xsl:value-of select="ip" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:text>N/A</xsl:text>
+						</xsl:otherwise>
+					</xsl:choose>
+				</td>
+				
+				<td>
+					<xsl:value-of select="location" />
+				</td>
+			</tr>
+		</xsl:for-each>
 	</xsl:template>
-
-	<xsl:template match="hubs/type">
-		<TD>
-			<xsl:apply-templates />
-		</TD>
-	</xsl:template>
-
-	<!-- <xsl:template match="hubs"> <TD> <xsl:apply-templates /> </TD> </xsl:template> 
-		<xsl:template match="port"> <TD> <xsl:apply-templates /> </TD> </xsl:template> 
-		<xsl:template match="ip"> <TD> <xsl:apply-templates /> </TD> </xsl:template> 
-		<xsl:template match="location"> <TD> <xsl:apply-templates /> </TD> </xsl:template> -->
 
 
 </xsl:stylesheet>
+
