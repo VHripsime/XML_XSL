@@ -1,0 +1,32 @@
+<html>
+	<body>
+		<table border="1">
+			<tr>
+				<td>#</td>
+				<td>Processor type</td>
+				<td>Amount of computers</td>
+			</tr>
+			<table border="1">
+				<tr>
+					<td>#</td>
+					<td>Processor type</td>
+					<td>Amount of computers</td>
+				</tr>
+				<table border="1">
+					<tr>
+						<td>#</td>
+						<td>Processor type</td>
+						<td>Amount of computers</td>
+					</tr>
+					<table border="1">
+						<tr>
+							<td>#</td>
+							<td>Processor type</td>
+							<td>Amount of computers</td>
+						</tr>
+					</table>
+				</table>
+			</table>
+		</table>
+	</body>
+</html>

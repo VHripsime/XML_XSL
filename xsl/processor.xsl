@@ -19,50 +19,65 @@
 
 	<xsl:param name="elements"
 		select="document('')/*/xsl:variable[@name='processorTypes']/*" />
-	<xsl:param name="elementsLength" select="$elements" />
-	<xsl:param name="startIndex" select="1" />
-	<xsl:param name="nextIndex" select="10" />
 
 	<xsl:template match='equipment'>
 		<table border='1'>
 			<tr>
-				<th>#</th>
+				<th>###</th>
 				<th>Processor type</th>
 				<th>Amount of computers</th>
 			</tr>
 
-			<tr>
-				<td>
-					<xsl:number value="position()" />
-				</td>
-				<td>
-					length
-				</td>
-				<td>
-					<xsl:value-of select="$elementsLength" />
-					<!-- <xsl:apply-templates select="computers"> <xsl:with-param name="processor" 
-						select="$elements[1]" /> </xsl:apply-templates> -->
-				</td>
-			</tr>
+			<!-- <xsl:apply-templates select="computers" /> -->
 
-			<!-- <tr> <td> <xsl:number value="position()" /> </td> <td> <xsl:value-of 
-				select="$elements[2]" /> </td> <td> <xsl:apply-templates select="computers"> 
-				<xsl:with-param name="processor" select="$elements[2]" /> </xsl:apply-templates> 
-				</td> </tr> -->
+			<xsl:apply-templates select='computers' />
+
 		</table>
 	</xsl:template>
 
 
-	<xsl:template match='computers'>
-		<xsl:param name="processor" />
-		<xsl:value-of
-			select="count(computer/hardware/cpu[@type=$processor])" />
+	<xsl:template match='computers' name="completeInfo">
+
+		<!-- <xsl:param name="elementsLength" select="count($elements)" /> -->
+
+		<tr>
+			<td>
+				<xsl:number name="current" value="position()" />
+			</td>
+			<td>
+				<xsl:value-of select="$elements[$current]" />
+			</td>
+			<td>
+				index:	<xsl:value-of select="$current" />
+				<!-- <xsl:apply-templates select="computer"> <xsl:with-param name="processor" 
+					select="$elements[$index]" /> </xsl:apply-templates> -->
+			</td>
+		</tr>
+
 	</xsl:template>
 
 
-	<!-- <xsl:template name="repeatable"> <xsl:param name="index" select="1" 
-		/> <xsl:param name="total" select="10" /> Do something <xsl:if test="not($index 
-		= $total)"> <xsl:call-template name="repeatable"> <xsl:with-param name="index" 
-		select="$index + 1" /> </xsl:call-template> </xsl:if> </xsl:template> -->
+	<xsl:template match='computer' name="single">
+		<xsl:param name="index" select="0" />
+		<tr>
+			<td>
+				<xsl:number name="current" value="position()" />
+			</td>
+			<td>
+				<xsl:value-of select="$elements[$index]" />
+			</td>
+			<td>
+				index:
+				<xsl:value-of select="$current" />
+				<!-- <xsl:apply-templates select="computer"> <xsl:with-param name="processor" 
+					select="$elements[$index]" /> </xsl:apply-templates> -->
+			</td>
+		</tr>
+	</xsl:template>
+
+	<xsl:template match='hardware'>
+		<xsl:param name="processor" />
+		<xsl:value-of select="count(cpu[@type=$processor])" />
+	</xsl:template>
 
 </xsl:stylesheet>
