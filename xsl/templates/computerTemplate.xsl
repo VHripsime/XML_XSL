@@ -3,8 +3,7 @@
 
 <xsl:template match="equipment">
 		<xsl:for-each select="computers/*">
-			<xsl:if
-				test="software/item[@type = 'os']/title = 'Windows NT Server 4.0'">
+			<xsl:if test="software/item[@type = 'os']/title = 'Windows NT Server 4.0'">
 
 				<ul>
 					<xsl:call-template name="networkName" />
@@ -19,8 +18,7 @@
 
 	<xsl:template name="networkName">
 		<li>
-			Name:
-			<xsl:value-of select="@networkname" />
+			Name: <xsl:value-of select="@networkname" />
 		</li>
 	</xsl:template>
 
@@ -32,8 +30,8 @@
 
 		<li>
 			Service pack installed:
-			<xsl:choose>				
-				
+			<xsl:choose>
+			
 				<xsl:when test="item[@type = 'os']/servicepacks/servicepack[last()]/@name">
 					<xsl:value-of select="item[@type = 'os']/servicepacks/servicepack[last()]/@name" />
 				</xsl:when>

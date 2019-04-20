@@ -6,7 +6,7 @@
 	<xsl:template match="/">
 		<html>
 			<body>
-				<xsl:apply-templates />
+				<xsl:apply-templates select="equipment"/>
 			</body>
 		</html>
 	</xsl:template>
