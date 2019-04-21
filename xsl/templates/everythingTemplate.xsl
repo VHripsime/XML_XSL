@@ -1,45 +1,76 @@
 <?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-	<xsl:template match="equipment" name='computers'>
-	<h2>Computers</h2>
-		<table border='1' cellpadding="4">
+	<xsl:template name="peripherals">
+		<h2>Peripherals</h2>
+		<table border='1' cellpadding="8">
 			<tr bgcolor="#F0F0F0">
-				<th width="30px" align="center">#</th>
-				<th width="80px">Name</th>
-				<th width="80px">Type</th>
-				<th width="285px">Hardware</th>
-				<th width="220px">Software</th>
-			</tr>			
-			<xsl:call-template name="result" />
+				<th align="center">#</th>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Location</th>
+			</tr>
+			<xsl:for-each select="equipment/peripherals/*/*">
+				<tr>
+					<td align="center">
+						<xsl:number value="position()" />
+					</td>
+					<td>
+						<xsl:choose>
+							<xsl:when test="@networkname">
+								<xsl:value-of select="@networkname" />
+							</xsl:when>
+							<xsl:otherwise>
+								N/A
+							</xsl:otherwise>
+						</xsl:choose>
+					</td>
+					<td>
+						<xsl:value-of select="type" />
+					</td>
+					<td>
+						<xsl:value-of select="location" />
+					</td>
+				</tr>
+			</xsl:for-each>
 		</table>
 	</xsl:template>
 
 
-	<xsl:template name="result">
-		<xsl:for-each select="computers/*">
-			<tr>
-				<td align="center">
-					<xsl:number value="position()" />
-				</td>
-				<td>
-					<xsl:value-of select="@networkname" />
-				</td>
-				<td>
-					<xsl:value-of select="@type" />
-				</td>
-				<td>
-					<xsl:for-each select="hardware/*">
-						<xsl:call-template name="hardwareParameters" />
-					</xsl:for-each>
-				</td>
-				<td valign="top">
-					<xsl:for-each select="software/*">
-						<xsl:call-template name="programs" />
-					</xsl:for-each>
-				</td>
+	<xsl:template name="computers">
+		<h2>Computers</h2>
+		<table border='1' cellpadding="6">
+			<tr bgcolor="#F0F0F0">
+				<th align="center">#</th>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Hardware</th>
+				<th>Software</th>
 			</tr>
-		</xsl:for-each>
+			<xsl:for-each select="equipment/computers/*">
+				<tr>
+					<td align="center">
+						<xsl:number value="position()" />
+					</td>
+					<td>
+						<xsl:value-of select="@networkname" />
+					</td>
+					<td>
+						<xsl:value-of select="@type" />
+					</td>
+					<td>
+						<xsl:for-each select="hardware/*">
+							<xsl:call-template name="hardwareParameters" />
+						</xsl:for-each>
+					</td>
+					<td valign="top">
+						<xsl:for-each select="software/*">
+							<xsl:call-template name="programs" />
+						</xsl:for-each>
+					</td>
+				</tr>
+			</xsl:for-each>
+		</table>
 	</xsl:template>
 
 
@@ -98,8 +129,7 @@
 			<xsl:for-each select="@*">
 				<xsl:value-of select="name()" />
 				-
-				<xsl:value-of select="." />
-				,
+				<xsl:value-of select="." />,
 			</xsl:for-each>
 			<br />
 		</xsl:for-each>
