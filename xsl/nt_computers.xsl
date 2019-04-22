@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:template match="/">
+		<html>
+			<body>
+				<h2>Computers</h2>
+				<xsl:apply-templates />
+			</body>
+		</html>
+	</xsl:template>
+
+
+
+	<xsl:template match='equipment'>
+		<xsl:for-each select="computers/*">
+			<xsl:if test="*/*/title='Windows NT Server 4.0'">
+				<br />
+				Name:
+				<xsl:value-of select="@networkname" />
+				<br />
+
+				OS:
+				<xsl:value-of select="*/*/title" />
+				<br />
+
+				Service pack installed:
+				<xsl:choose>
+					<xsl:when test="*/*/servicepacks">
+						<xsl:value-of
+							select="*/*/servicepacks/*[last()]/@name" />
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text>Not installed</xsl:text>
+					</xsl:otherwise>
+				</xsl:choose>
+				<br />
+
+				CDROM drive:
+				<xsl:choose>
+					<xsl:when test="*/*/drive/@type='cd'">
+						Yes
+					</xsl:when>
+					<xsl:otherwise>
+						No
+					</xsl:otherwise>
+				</xsl:choose>
+				<br />
+
+			</xsl:if>
+		</xsl:for-each>
+	</xsl:template>
+
+</xsl:stylesheet>
