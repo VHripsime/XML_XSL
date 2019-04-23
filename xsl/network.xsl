@@ -21,7 +21,7 @@
 						<th>Location</th>
 					</tr>
 
-                  <xsl:apply-templates></xsl:apply-templates>
+                  <xsl:apply-templates  select="equipment"/>
 				</table>
 			</body>
 		</html>
@@ -31,7 +31,9 @@
 	<xsl:template match="equipment">
 
 		<xsl:for-each select="network/*/*">
-		<xsl:sort select="port"/>
+		<xsl:sort select="type"/>
+		
+		
 			<tr>
 				<td>
 					 <xsl:value-of select="position()" /> 
@@ -50,11 +52,19 @@
 				<td>
 					<xsl:value-of select="port" />
 				</td>
-
-				<td>
-					<xsl:value-of select="ip" />
-				</td>
-
+				
+					<td>
+      <xsl:choose>
+				<xsl:when test="ip !='' ">
+					 <xsl:value-of select="ip" />		
+				</xsl:when>	
+	   
+	           <xsl:otherwise> N/A </xsl:otherwise>
+                 
+	   </xsl:choose> 
+	
+		</td>
+	
 				<td>
 					<xsl:value-of select="location" />
 				</td>
@@ -65,7 +75,5 @@
 
 
 	</xsl:template>
-
-
 
 </xsl:stylesheet> 
