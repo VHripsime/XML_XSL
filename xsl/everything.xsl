@@ -2,9 +2,9 @@
 
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	
+
 	<xsl:import href="network.xsl" />
-	
+
 	<xsl:template match="/">
 
 		<html>
@@ -23,13 +23,13 @@
 						<th>Software</th>
 					</tr>
 					<xsl:apply-templates
-						select="equipment/computers" />
+						select="equipment/*/computer" />
 				</table>
 
 				<h4> Network equipment</h4>
 
-            <xsl:apply-imports select="network.xsl"/>
-	
+				<xsl:apply-imports />
+
 
 				<h4> Peripherals</h4>
 				<table border="1">
@@ -41,41 +41,39 @@
 						<th>Location</th>
 					</tr>
 					<xsl:apply-templates
-						select="equipment" />
-			
+						select="equipment/peripherals" />
+
 				</table>
 			</body>
 		</html>
 	</xsl:template>
 
 
-	<xsl:template match="equipment/computers">
+	<xsl:template match="computer">
 
-		<xsl:for-each select="computer">
-			<tr>
-				<td>
-					<xsl:value-of select="position()" />
-				</td>
-				<td>
-					<xsl:value-of select="@networkname" />
-				</td>
-				<td>
-					<xsl:value-of select="@type" />
-				</td>
-				<td>
-					<xsl:value-of select="//hardware" />
-					<xsl:apply-templates select="hardware" />
-				</td>
-				<td>
-					<xsl:apply-templates select="software" />
-				</td>
+		<tr>
+			<td>
+				<xsl:value-of select="position()" />
+			</td>
+			<td>
+				<xsl:value-of select="@networkname" />
+			</td>
+			<td>
+				<xsl:value-of select="@type" />
+			</td>
+			<td>
+				<xsl:apply-templates select="hardware" />
+			</td>
+			<td>
+				<br />
+				<xsl:apply-templates select="software" />
+			</td>
 
-			</tr>
-
-		</xsl:for-each>
+		</tr>
 	</xsl:template>
 
 	<xsl:template match="hardware">
+
 		<br />
 		<xsl:value-of select="cpu/@type" />
 		<br />
@@ -86,51 +84,59 @@
 		<xsl:value-of select="ram/@type" />
 		<br />
 		<xsl:value-of select="storage/@space" />
+		<xsl:apply-templates select="drives/drive" />
 		<br />
-		<xsl:value-of select="drives/*/@type" />
-		<br />
-		<xsl:value-of select="drives/*/@size" />
 
 	</xsl:template>
 
+	<xsl:template match="drive">
+		<br />
+		<xsl:value-of select="@type" />
+		&#160;
+		<xsl:value-of select="@formfactor" />
+		&#160;
+		<xsl:value-of select="@size" />
 
-	<xsl:template match="software">
-		<br />
-		<xsl:value-of select="node()/@type" />
-		<br />
-		<xsl:value-of select="." />
-		<br />
 	</xsl:template>
 
+	<xsl:template match="software/*">
+		<xsl:value-of select="@type" />
+		<br />
+		<xsl:value-of select="title" />
+	</xsl:template>
 
-	<xsl:template match="equipment">
-		<xsl:for-each select="peripherals/*/*">
-			<tr>
-				<td>
-					<xsl:value-of select="position()" />
-				</td>
-				<td>
-				
+	<xsl:template match="peripherals">
+		<xsl:apply-templates select="./*/*" />
+
+	</xsl:template>
+
+	<xsl:template match="printer | scanner | copier">
+		<tr>
+			<td>
+				<xsl:value-of select="position()" />
+			</td>
+			<td>
+
 				<xsl:choose>
-				<xsl:when test="@networkname !='' ">
-					 <xsl:value-of select="@networkname" />		
-				</xsl:when>	
-	   
-	           <xsl:otherwise> N/A </xsl:otherwise>
-                 
-	   </xsl:choose> 
-			
-				</td>
-				<td>
-					<xsl:value-of select="type" />
-				</td>
-				<td>
-					<xsl:value-of select="location" />
-				</td>
+					<xsl:when test="@networkname !='' ">
+						<xsl:value-of select="@networkname" />
+					</xsl:when>
 
-			</tr>
-		</xsl:for-each>
+					<xsl:otherwise>
+						N/A
+					</xsl:otherwise>
+
+				</xsl:choose>
+
+			</td>
+			<td>
+				<xsl:value-of select="type" />
+			</td>
+			<td>
+				<xsl:value-of select="location" />
+			</td>
+
+		</tr>
 	</xsl:template>
-
 
 </xsl:stylesheet>

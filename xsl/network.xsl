@@ -21,58 +21,60 @@
 						<th>Location</th>
 					</tr>
 
-                  <xsl:apply-templates  select="equipment"/>
+					<xsl:apply-templates select="equipment/network" />
 				</table>
 			</body>
 		</html>
 	</xsl:template>
-	
-	
-	<xsl:template match="equipment">
 
-		<xsl:for-each select="network/*/*">
-		<xsl:sort select="type"/>
-		
-		
-			<tr>
-				<td>
-					 <xsl:value-of select="position()" /> 
-					
-				</td>
-			
-				<td>
-					<xsl:value-of select="type" />
-					
-				</td>
 
-				<td>
-					<xsl:value-of select="name()" />
-				</td>
+	<xsl:template match="network">
+		<xsl:apply-templates select="./*/*">
+		<xsl:sort select="type" />
 
-				<td>
-					<xsl:value-of select="port" />
-				</td>
-				
-					<td>
-      <xsl:choose>
-				<xsl:when test="ip !='' ">
-					 <xsl:value-of select="ip" />		
-				</xsl:when>	
-	   
-	           <xsl:otherwise> N/A </xsl:otherwise>
-                 
-	   </xsl:choose> 
-	
-		</td>
-	
-				<td>
-					<xsl:value-of select="location" />
-				</td>
+		</xsl:apply-templates>
 
-			</tr>
+	</xsl:template>
 
-		</xsl:for-each>
+	<xsl:template match="hub | commutator | router">
+		<tr>
+			<td>
+				<xsl:value-of select="position()" />
 
+			</td>
+
+			<td>
+				<xsl:value-of select="type" />
+
+			</td>
+
+			<td>
+				<xsl:value-of select="name()" />
+			</td>
+
+			<td>
+				<xsl:value-of select="port" />
+			</td>
+
+			<td>
+				<xsl:choose>
+					<xsl:when test="ip !='' ">
+						<xsl:value-of select="ip" />
+					</xsl:when>
+
+					<xsl:otherwise>
+						N/A
+					</xsl:otherwise>
+
+				</xsl:choose>
+
+			</td>
+
+			<td>
+				<xsl:value-of select="location" />
+			</td>
+
+		</tr>
 
 	</xsl:template>
 

@@ -8,51 +8,56 @@
 				<title> Computers</title>
 			</head>
 			<body>
-				<xsl:apply-templates select="equipment" />
+				<xsl:apply-templates
+					select="equipment/computers/computer" />
+
 			</body>
 		</html>
 	</xsl:template>
 
-	<xsl:template match="equipment">
-		<xsl:for-each select="computers/*">
-			<xsl:if test="software/*/title = 'Windows NT Server 4.0'">
-				<p style="color:#1216BF">
-					Name:
-					<xsl:value-of select="@networkname" />
-				</p>
-				<p style="color:#E61E99">
-					OS:
-					<xsl:value-of select="software/*/title" />
-				</p>
 
 
-				<p style="color:#8CBB25">
-					Service Pack Installed:
-					<xsl:choose>
-						<xsl:when test="software/*/*/*[last()]/@name !='' ">
-							<xsl:value-of select="software/*/*/*[last()]/@name" />
-						</xsl:when>
+	<xsl:template match="computer">
 
-						<xsl:otherwise>
-							Not installed:
-						</xsl:otherwise>
+		<xsl:if test="software/*/title = 'Windows NT Server 4.0'">
+			Name:
+			<xsl:value-of select="@networkname" />
+			<br />
+			<xsl:apply-templates select="software" />
+			<br />
+			<xsl:apply-templates select="hardware/drives" />
+			<br />
 
-					</xsl:choose>
-				</p>
+		</xsl:if>
 
-				<p style="color:#F24526">
-					CDROM drive:
-					<xsl:apply-templates select="hardware/drives" />
-				</p>
-			</xsl:if>
-		</xsl:for-each>
 	</xsl:template>
 
 
 
-	<xsl:template match="hardware/drives">
+	<xsl:template match="software">
+
+		OS:
+		<xsl:value-of select="item[@type ='os']/title" />
+		<br />
+		Service Pack Installed:
 		<xsl:choose>
-			<xsl:when test="/*/@type ='cd'">
+
+			<xsl:when test="item/servicepacks/servicepack[last()]/@name !='' ">
+				<xsl:value-of select="item/servicepacks/servicepack[last()]/@name" />
+			</xsl:when>
+
+			<xsl:otherwise>
+				Not installed:
+			</xsl:otherwise>
+
+		</xsl:choose>
+
+	</xsl:template>
+
+	<xsl:template match="drives">
+	CDROM drive:
+		<xsl:choose>
+			<xsl:when test="*/@type ='cd'">
 				Yes:
 			</xsl:when>
 
@@ -60,8 +65,8 @@
 				No:
 			</xsl:otherwise>
 		</xsl:choose>
+		<br />
 	</xsl:template>
-
 
 </xsl:stylesheet>
 
