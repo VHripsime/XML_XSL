@@ -5,38 +5,35 @@
 	<xsl:template match="/">
 		<html>
 			<body>
-				<xsl:apply-templates select="equipment" />
+
+				<h2>Networks</h2>
+				<table border='1' cellpadding="4">
+
+					<tr bgcolor=" #f4d03f ">
+						<th width="30px" align="center">#</th>
+						<th>Name</th>
+						<th>Equipment type</th>
+						<th>Port number</th>
+						<th>IP address</th>
+						<th width="80px">Location</th>
+					</tr>
+
+					<xsl:apply-templates select="equipment/network" />
+				</table>
+
 			</body>
 		</html>
 	</xsl:template>
 
-	<xsl:template match="equipment">
-		<h2>Networks</h2>
-		<table border='1' cellpadding="4">
 
-			<tr bgcolor="#F0F0F0">
-				<th width="30px" align="center">#</th>
-				<th>Name</th>
-				<th>Equipment type</th>
-				<th>Port number</th>
-				<th>IP address</th>
-				<th width="80px">Location</th>
-			</tr>
-
-			<xsl:apply-templates select="network" />
-		</table>
-	</xsl:template>
-
-
-	<xsl:template match="network">
-		<xsl:apply-templates select="hubs">
+	<xsl:template match='network'>
+		<xsl:apply-templates select='./*/*'>
 			<xsl:sort select="type" />
 		</xsl:apply-templates>
 	</xsl:template>
 
 
-	<xsl:template select="hubs">
-	<xsl:for-each select="hub">
+	<xsl:template match='hub | commutator | router'>
 		<tr>
 			<td align="center">
 				<xsl:number value="position()" />
@@ -57,7 +54,6 @@
 				<xsl:value-of select="location" />
 			</td>
 		</tr>
-		</xsl:for-each>
 	</xsl:template>
 
 

@@ -1,166 +1,146 @@
 <?xml version="1.0"?>
-<xsl:stylesheet version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<xsl:import href="network.xsl" />
 
-	<xsl:template match="/">
+	<xsl:template match='/'>
 		<html>
 			<body>
-				<xsl:apply-templates />
+
+				<xsl:apply-imports />
 				<br />
-				<xsl:call-template name="peripherals" />
+				<xsl:apply-templates select="equipment/peripherals" />
 				<br />
-				<xsl:call-template name="computers" />
+				<xsl:apply-templates select="equipment/computers" />
+
 			</body>
 		</html>
 	</xsl:template>
 
-	<xsl:template name="peripherals">
+
+	<xsl:template match='peripherals'>
 		<h2>Peripherals</h2>
 		<table border='1' cellpadding="8">
-			<tr bgcolor="#F0F0F0">
+
+			<tr bgcolor="#d4e6f1">
 				<th align="center">#</th>
 				<th>Name</th>
 				<th>Type</th>
 				<th>Location</th>
 			</tr>
-			<xsl:for-each select="equipment/peripherals/*/*">
-				<tr>
-					<td align="center">
-						<xsl:number value="position()" />
-					</td>
-					<td>
-						<xsl:choose>
-							<xsl:when test="@networkname">
-								<xsl:value-of select="@networkname" />
-							</xsl:when>
-							<xsl:otherwise>
-								N/A
-							</xsl:otherwise>
-						</xsl:choose>
-					</td>
-					<td>
-						<xsl:value-of select="type" />
-					</td>
-					<td>
-						<xsl:value-of select="location" />
-					</td>
-				</tr>
-			</xsl:for-each>
+
+			<xsl:apply-templates select='./*/*' />
+
 		</table>
 	</xsl:template>
 
 
-	<xsl:template name="computers">
+	<xsl:template match="printer | scanner | copier">
+		<tr>
+			<td align="center">
+				<xsl:number value="position()" />
+			</td>
+			<td>
+				<xsl:choose>
+					<xsl:when test="@networkname">
+						<xsl:value-of select="@networkname" />
+					</xsl:when>
+					<xsl:otherwise>
+						N/A
+					</xsl:otherwise>
+				</xsl:choose>
+			</td>
+			<td>
+				<xsl:value-of select="type" />
+			</td>
+			<td>
+				<xsl:value-of select="location" />
+			</td>
+		</tr>
+	</xsl:template>
+
+
+	<xsl:template match="computers">
 		<h2>Computers</h2>
 		<table border='1' cellpadding="6">
-			<tr bgcolor="#F0F0F0">
+
+			<tr bgcolor="#5499c7">
 				<th align="center">#</th>
 				<th>Name</th>
 				<th>Type</th>
 				<th>Hardware</th>
 				<th>Software</th>
 			</tr>
-			<xsl:for-each select="equipment/computers/*">
-				<tr>
-					<td align="center">
-						<xsl:number value="position()" />
-					</td>
-					<td>
-						<xsl:value-of select="@networkname" />
-					</td>
-					<td>
-						<xsl:value-of select="@type" />
-					</td>
-					<td>
-						<xsl:for-each select="hardware/*">
-							<xsl:call-template name="hardwareParameters" />
-						</xsl:for-each>
-					</td>
-					<td valign="top">
-						<xsl:for-each select="software/*">
-							<xsl:call-template name="programs" />
-						</xsl:for-each>
-					</td>
-				</tr>
-			</xsl:for-each>
+
+			<xsl:apply-templates select='./*' />
+
 		</table>
 	</xsl:template>
 
 
-	<xsl:template name="hardwareParameters">
-		<xsl:choose>
+	<xsl:template match="computer">
+		<tr>
+			<td align="center">
+				<xsl:number value="position()" />
+			</td>
+			<td>
+				<xsl:value-of select="@networkname" />
+			</td>
+			<td>
+				<xsl:value-of select="@type" />
+			</td>
+			<td>
+				<xsl:apply-templates select='hardware/*' />
+			</td>
+			<td valign="top">
+				<xsl:apply-templates select='software/*' />
+			</td>
+		</tr>
+	</xsl:template>
 
-			<xsl:when test="@*">
-				<xsl:call-template name="withAttributes" />
+
+	<xsl:template match="hardware/*">
+		<b>	<xsl:value-of select="name()" /> </b>
+		<br />
+		
+		<xsl:choose>		
+			
+			<xsl:when test="@*">				
+				<xsl:apply-templates select="@*" />
+				<hr />
 			</xsl:when>
 
 			<xsl:when test="./*">
-				<xsl:call-template name="withElements" />
+				<xsl:apply-templates select="drive" />
 			</xsl:when>
 
 			<xsl:otherwise>
-				<xsl:call-template name="withValue" />
+				<xsl:value-of select="." />
+				<br /> <hr />
 			</xsl:otherwise>
-
+		
 		</xsl:choose>
 	</xsl:template>
 
 
-	<xsl:template name="programs">
-		<b>
-			<xsl:value-of select="@type" />
-		</b>
+	<xsl:template match="software/*">
+		<b>	<xsl:value-of select="@type" />	</b>
 		<br />
 		<xsl:value-of select="title" />
-		<br />
-		<br />
-		<hr />
+		<br /> <hr />
 	</xsl:template>
 
 
-	<xsl:template name="withAttributes">
-		<b>
-			<xsl:value-of select="name()" />
-		</b>
-		<br />
-		<xsl:for-each select="@*">
-			<xsl:value-of select="name()" />
-			-
-			<xsl:value-of select="." />
-			<br />
-		</xsl:for-each>
-		<hr />
+	<xsl:template match="@*">
+		<xsl:value-of select="name()" />
+		-
+		<xsl:value-of select="." />,
 	</xsl:template>
 
 
-	<xsl:template name="withElements">
-		<b>
-			<xsl:value-of select="name()" />
-		</b>
+	<xsl:template match="drive">
+		<xsl:apply-templates select="@*" />
 		<br />
-		<xsl:for-each select="./*">
-			<xsl:for-each select="@*">
-				<xsl:value-of select="name()" />
-				-
-				<xsl:value-of select="." />
-				,
-			</xsl:for-each>
-			<br />
-		</xsl:for-each>
-	</xsl:template>
-
-
-	<xsl:template name="withValue">
-		<b>
-			<xsl:value-of select="name()" />
-		</b>
-		<br />
-		<xsl:value-of select="." />
-		<br />
-		<br />
-		<hr />
 	</xsl:template>
 
 

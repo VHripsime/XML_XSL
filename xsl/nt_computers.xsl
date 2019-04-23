@@ -4,52 +4,43 @@
 	<xsl:template match="/">
 		<html>
 			<body>
-				<xsl:apply-templates select="equipment" />
+				<h2>Computers</h2>
+
+				<xsl:apply-templates
+					select="equipment/computers/computer" />
 			</body>
 		</html>
 	</xsl:template>
 
 
-	<xsl:template match="equipment">
-		<h2>Computers</h2>
-		
-		<xsl:for-each select="computers/*">
-			<xsl:if test="software/item[@type = 'os']/title = 'Windows NT Server 4.0'">
+	<xsl:template match="computer">
+		<xsl:if	test="software/item[@type = 'os']/title = 'Windows NT Server 4.0'">
+			<ul>
+				<li>
+					Name:
+					<xsl:value-of select="@networkname" />
+				</li>
 
-				<ul>
-					<xsl:call-template name="networkName" />
-					<xsl:apply-templates select="software" />
-					<xsl:apply-templates select="hardware" />
-				</ul>
-
-			</xsl:if>
-		</xsl:for-each>
+				<xsl:apply-templates select="software" />
+				<xsl:apply-templates select="hardware" />
+			</ul>
+		</xsl:if>
 	</xsl:template>
 
 
-	<xsl:template name="networkName">
-		<li>
-			Name:
-			<xsl:value-of select="@networkname" />
-		</li>
-	</xsl:template>
-
-
-	<xsl:template match="software">
+	<xsl:template match="software" name="a">
 		<li>
 			OS:
 			<xsl:value-of select="item[@type = 'os']/title" />
 		</li>
-
 		<li>
 			Service pack installed:
 			<xsl:choose>
 
-				<xsl:when
-					test="item[@type = 'os']/servicepacks/servicepack[last()]/@name">
-					<xsl:value-of
-						select="item[@type = 'os']/servicepacks/servicepack[last()]/@name" />
+				<xsl:when test="item[@type = 'os']/servicepacks/servicepack[last()]/@name">
+					<xsl:value-of select="item[@type = 'os']/servicepacks/servicepack[last()]/@name" />
 				</xsl:when>
+
 				<xsl:otherwise>
 					Not installed
 				</xsl:otherwise>
@@ -64,13 +55,7 @@
 			CDROM drive:
 
 			<xsl:variable name="flag">
-				<xsl:for-each select="drives/*">
-
-					<xsl:if test="@type = 'cd'">
-						<xsl:text>true</xsl:text>
-					</xsl:if>
-
-				</xsl:for-each>
+				<xsl:apply-templates select="drives/*" />
 			</xsl:variable>
 
 			<xsl:choose>
@@ -83,6 +68,13 @@
 			</xsl:choose>
 
 		</li>
+	</xsl:template>
+
+
+	<xsl:template match="drive">
+		<xsl:if test="@type = 'cd'">
+			<xsl:text>true</xsl:text>
+		</xsl:if>
 	</xsl:template>
 
 
