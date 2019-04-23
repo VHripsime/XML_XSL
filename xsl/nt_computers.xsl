@@ -6,50 +6,56 @@
 		<html>
 			<body>
 				<h2>Computers</h2>
-				<xsl:apply-templates />
+				<xsl:apply-templates
+					select="equipment/computers" />
 			</body>
 		</html>
 	</xsl:template>
 
 
+	<xsl:template match='computers'>
+		<xsl:apply-templates select="computer">
+		</xsl:apply-templates>
+	</xsl:template>
 
-	<xsl:template match='equipment'>
-		<xsl:for-each select="computers/*">
-			<xsl:if test="*/*/title='Windows NT Server 4.0'">
-				<br />
-				Name:
-				<xsl:value-of select="@networkname" />
-				<br />
 
-				OS:
-				<xsl:value-of select="*/*/title" />
-				<br />
 
-				Service pack installed:
-				<xsl:choose>
-					<xsl:when test="*/*/servicepacks">
-						<xsl:value-of
-							select="*/*/servicepacks/*[last()]/@name" />
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:text>Not installed</xsl:text>
-					</xsl:otherwise>
-				</xsl:choose>
-				<br />
+	<xsl:template match='computer'>
+		<xsl:if test="*/*/title='Windows NT Server 4.0'">
+			<br />
+			Name:
+			<xsl:value-of select="@networkname" />
+			<br />
 
-				CDROM drive:
-				<xsl:choose>
-					<xsl:when test="*/*/drive/@type='cd'">
-						Yes
-					</xsl:when>
-					<xsl:otherwise>
-						No
-					</xsl:otherwise>
-				</xsl:choose>
-				<br />
+			OS:
+			<xsl:value-of select="*/*/title" />
+			<br />
 
-			</xsl:if>
-		</xsl:for-each>
+			Service pack installed:
+			<xsl:choose>
+				<xsl:when test="*/*/servicepacks">
+					<xsl:value-of
+						select="*/*/servicepacks/*[last()]/@name" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>Not installed</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
+			<br />
+
+			CDROM drive:
+			<xsl:choose>
+				<xsl:when test="*/*/drive/@type='cd'">
+					Yes
+				</xsl:when>
+				<xsl:otherwise>
+					No
+				</xsl:otherwise>
+			</xsl:choose>
+			<br />
+
+		</xsl:if>
+
 	</xsl:template>
 
 </xsl:stylesheet>
