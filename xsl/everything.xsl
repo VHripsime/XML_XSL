@@ -6,12 +6,12 @@
 	<xsl:template match='/'>
 		<html>
 			<body>
-
+				
+				<xsl:apply-templates select="equipment/computers" />
+				<br />
 				<xsl:apply-imports />
 				<br />
 				<xsl:apply-templates select="equipment/peripherals" />
-				<br />
-				<xsl:apply-templates select="equipment/computers" />
 
 			</body>
 		</html>

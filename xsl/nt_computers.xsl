@@ -28,7 +28,7 @@
 	</xsl:template>
 
 
-	<xsl:template match="software" name="a">
+	<xsl:template match="software">
 		<li>
 			OS:
 			<xsl:value-of select="item[@type = 'os']/title" />
@@ -37,7 +37,7 @@
 			Service pack installed:
 			<xsl:choose>
 
-				<xsl:when test="item[@type = 'os']/servicepacks/servicepack[last()]/@name">
+				<xsl:when test="item[@type = 'os']/servicepacks">
 					<xsl:value-of select="item[@type = 'os']/servicepacks/servicepack[last()]/@name" />
 				</xsl:when>
 
@@ -53,13 +53,9 @@
 	<xsl:template match="hardware">
 		<li>
 			CDROM drive:
-
-			<xsl:variable name="flag">
-				<xsl:apply-templates select="drives/*" />
-			</xsl:variable>
-
-			<xsl:choose>
-				<xsl:when test="$flag='true'">
+ 
+ 			<xsl:choose>
+				<xsl:when test="drives/drive/@type = 'cd'">
 					Yes
 				</xsl:when>
 				<xsl:otherwise>
@@ -68,13 +64,6 @@
 			</xsl:choose>
 
 		</li>
-	</xsl:template>
-
-
-	<xsl:template match="drive">
-		<xsl:if test="@type = 'cd'">
-			<xsl:text>true</xsl:text>
-		</xsl:if>
 	</xsl:template>
 
 
