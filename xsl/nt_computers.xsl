@@ -4,7 +4,7 @@
 
 	<xsl:template match="/">
 		<html>
-			<body>
+			<body>		
 				<h2>Computers</h2>
 				<xsl:apply-templates
 					select="equipment/computers" />
@@ -55,7 +55,5 @@
 			<br />
 
 		</xsl:if>
-
 	</xsl:template>
-
 </xsl:stylesheet>

@@ -30,7 +30,7 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
-	<xsl:template match='hub | commutator | router'>
+	<xsl:template match='network/*/*'>
 		<tr>
 			<td>
 				<xsl:value-of select="position()" />
@@ -64,6 +64,5 @@
 			</td>
 		</tr>
 	</xsl:template>
-
 </xsl:stylesheet>
 

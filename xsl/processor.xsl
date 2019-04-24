@@ -5,8 +5,8 @@
 	<xsl:template match="/">
 		<html>
 			<body>
-				<h2>Processors</h2>
 
+				<h2>Processors</h2>
 				<table border="1" cellspacing="0" cellpadding="2">
 					<tr bgcolor="#DCDCDC">
 						<th>#</th>
@@ -14,8 +14,7 @@
 						<th>Amount of computers</th>
 					</tr>
 
-					<xsl:apply-templates
-						select="equipment/computers" />
+					<xsl:apply-templates select="equipment" />
 
 				</table>
 			</body>
@@ -49,7 +48,6 @@
 			</td>
 		</tr>
 	</xsl:template>
-
 </xsl:stylesheet>
 
 
