@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <equipment>
 	<computers>
 		<computer type="desktop" networkname="GREEN">
 			<hardware>
-				<cpu type="Pentium3" mhzclock="500"/>
-				<ram amount="128" type="SDRAM"/>
+				<cpu type="Pentium3" mhzclock="500" />
+				<ram amount="128" type="SDRAM" />
 				<soundcard>SBLive!1024 Player</soundcard>
-				<storage space="17G"/>
+				<storage space="17G" />
 				<drives>
-					<drive type="floppy" formfactor="3.5" size="1.44"/>
-					<drive type="cd"/>
+					<drive type="floppy" formfactor="3.5" size="1.44" />
+					<drive type="cd" />
 				</drives>
 			</hardware>
 			<software>
@@ -17,8 +18,8 @@
 					<title>Windows 2000 Advanced Server</title>
 					<vendor>Microsoft</vendor>
 					<servicepacks>
-						<servicepack name="SP2"/>
-						<servicepack name="Q2345678" type="hotfix"/>
+						<servicepack name="SP2" />
+						<servicepack name="Q2345678" type="hotfix" />
 					</servicepacks>
 				</item>
 				<item type="antivirus">
@@ -35,11 +36,11 @@
 		</computer>
 		<computer type="desktop" networkname="BLUE">
 			<hardware>
-				<cpu type="Pentium2" mhzclock="350"/>
-				<ram amount="64" type="SDRAM"/>
-				<storage space="5G"/>
+				<cpu type="Pentium2" mhzclock="350" />
+				<ram amount="64" type="SDRAM" />
+				<storage space="5G" />
 				<drives>
-					<drive type="floppy" formfactor="3.5" size="1.44"/>
+					<drive type="floppy" formfactor="3.5" size="1.44" />
 				</drives>
 			</hardware>
 			<software>
@@ -47,7 +48,7 @@
 					<title>Windows NT Server 4.0</title>
 					<vendor>Microsoft</vendor>
 					<servicepacks>
-						<servicepack name="SP6a"/>
+						<servicepack name="SP6a" />
 					</servicepacks>
 				</item>
 				<item type="antivirus">
@@ -64,13 +65,13 @@
 		</computer>
 		<computer type="desktop" networkname="RED">
 			<hardware>
-				<cpu type="Pentium3" mhzclock="800"/>
-				<ram amount="256" type="SDRAM"/>
-				<storage space="25G"/>
+				<cpu type="Pentium3" mhzclock="800" />
+				<ram amount="256" type="SDRAM" />
+				<storage space="25G" />
 				<drives>
-					<drive type="floppy" formfactor="3.5" size="1.44"/>
-					<drive type="cd"/>
-					<drive type="tape" size="10G"/>
+					<drive type="floppy" formfactor="3.5" size="1.44" />
+					<drive type="cd" />
+					<drive type="tape" size="10G" />
 				</drives>
 			</hardware>
 			<software>
@@ -78,7 +79,7 @@
 					<title>Windows NT Server 4.0</title>
 					<vendor>Microsoft</vendor>
 					<servicepacks>
-						<servicepack name="SP4"/>
+						<servicepack name="SP4" />
 					</servicepacks>
 				</item>
 				<item type="antivirus">
@@ -100,17 +101,17 @@
 		</computer>
 		<computer type="server" networkname="GNAT">
 			<hardware>
-				<cpu type="Pentium4" mhzclock="1000"/>
-				<ram amount="1024" type="RDRAM"/>
-				<storage space="50G"/>
+				<cpu type="Pentium4" mhzclock="1000" />
+				<ram amount="1024" type="RDRAM" />
+				<storage space="50G" />
 			</hardware>
 			<software>
 				<item type="os">
 					<title>Windows NT Server 4.0</title>
 					<vendor>Microsoft</vendor>
 					<servicepacks>
-						<servicepack name="SP6a"/>
-						<servicepack name="Q2345678" type="hotfix"/>
+						<servicepack name="SP6a" />
+						<servicepack name="Q2345678" type="hotfix" />
 					</servicepacks>
 				</item>
 				<item type="db">
@@ -118,7 +119,7 @@
 					<vendor>Microsoft</vendor>
 					<version>7.0</version>
 					<servicepacks>
-						<servicepack name="SP2"/>
+						<servicepack name="SP2" />
 					</servicepacks>
 				</item>
 			</software>
