@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:template match="/">
+
+		<html>
+			<head>
+				<title> Processor</title>
+			</head>
+			<body>
+
+				<table border="1">
+					<tr bgcolor="#9acd32">
+						<th> #</th>
+						<th>Processor type</th>
+						<th>Amount of computers</th>
+					</tr>
+
+					<xsl:apply-templates select="equipment/computers" />
+
+				</table>
+			</body>
+		</html>
+	</xsl:template>
+
+
+	<xsl:template match="computers">
+		<tr>
+			<td>1</td>
+			<td>Pentium2</td>
+			<td>
+				<xsl:value-of select="count(computer/hardware/cpu[@type = 'Pentium2'])" />
+			</td>
+
+		</tr>
+
+		<tr>
+			<td>2</td>
+			<td>Pentium3</td>
+			<td>
+				<xsl:value-of select="count(computer/hardware/cpu[@type = 'Pentium3'])" />
+			</td>
+		</tr>
+
+		<tr>
+			<td>3</td>
+			<td>Other types</td>
+			<td>
+				<xsl:value-of
+					select="count(computer/hardware/cpu[@type != 'Pentium2' and @type != 'Pentium3'])" />
+			</td>
+
+		</tr>
+
+	</xsl:template>
+</xsl:stylesheet>
