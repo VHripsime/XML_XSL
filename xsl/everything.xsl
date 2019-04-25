@@ -12,42 +12,32 @@
 				<title>Everything</title>
 			</head>
 			<body>
-				<h4>Computers</h4>
-				<table border="1">
-					<tr bgcolor="#1D79E7">
 
-						<th>#</th>
-						<th>Name</th>
-						<th>Type</th>
-						<th>Hardware</th>
-						<th>Software</th>
-					</tr>
-					<xsl:apply-templates
-						select="equipment/*/computer" />
-				</table>
-
-				<h4> Network equipment</h4>
+				<xsl:apply-templates select="equipment/computers" />
 
 				<xsl:apply-imports />
 
-
-				<h4> Peripherals</h4>
-				<table border="1">
-
-					<tr bgcolor="#1D79E7">
-						<th>#</th>
-						<th>Name</th>
-						<th>Type</th>
-						<th>Location</th>
-					</tr>
-					<xsl:apply-templates
-						select="equipment/peripherals" />
-
-				</table>
+				<xsl:apply-templates select="equipment/peripherals" />
+					
 			</body>
 		</html>
 	</xsl:template>
 
+
+	<xsl:template match="computers">
+		<h4>Computers</h4>
+		<table border="1">
+			<tr bgcolor="#1D79E7">
+
+				<th>#</th>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Hardware</th>
+				<th>Software</th>
+			</tr>
+			<xsl:apply-templates select="computer" />
+		</table>
+	</xsl:template>
 
 	<xsl:template match="computer">
 
@@ -96,7 +86,6 @@
 		<xsl:value-of select="@formfactor" />
 		&#160;
 		<xsl:value-of select="@size" />
-
 	</xsl:template>
 
 	<xsl:template match="software/*">
@@ -106,8 +95,18 @@
 	</xsl:template>
 
 	<xsl:template match="peripherals">
-		<xsl:apply-templates select="./*/*" />
+		<h4> Peripherals</h4>
+		<table border="1">
 
+			<tr bgcolor="#1D79E7">
+				<th>#</th>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Location</th>
+			</tr>
+
+			<xsl:apply-templates select="./*/*" />
+		</table>
 	</xsl:template>
 
 	<xsl:template match="printer | scanner | copier">
@@ -118,7 +117,7 @@
 			<td>
 
 				<xsl:choose>
-					<xsl:when test="@networkname !='' ">
+					<xsl:when test="@networkname">
 						<xsl:value-of select="@networkname" />
 					</xsl:when>
 

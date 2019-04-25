@@ -25,7 +25,7 @@
 			<br />
 			<xsl:apply-templates select="software" />
 			<br />
-			<xsl:apply-templates select="hardware/drives" />
+			<xsl:apply-templates select="hardware" />
 			<br />
 
 		</xsl:if>
@@ -42,7 +42,7 @@
 		Service Pack Installed:
 		<xsl:choose>
 
-			<xsl:when test="item/servicepacks/servicepack[last()]/@name !='' ">
+			<xsl:when test="item/servicepacks">
 				<xsl:value-of select="item/servicepacks/servicepack[last()]/@name" />
 			</xsl:when>
 
@@ -54,10 +54,10 @@
 
 	</xsl:template>
 
-	<xsl:template match="drives">
+	<xsl:template match="hardware">
 	CDROM drive:
 		<xsl:choose>
-			<xsl:when test="*/@type ='cd'">
+			<xsl:when test="drives/*/@type ='cd'">
 				Yes:
 			</xsl:when>
 

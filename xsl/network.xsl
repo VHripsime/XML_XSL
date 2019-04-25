@@ -10,7 +10,7 @@
 				<title> Network</title>
 			</head>
 			<body>
-
+				<h4> Network</h4>
 				<table border="1">
 					<tr bgcolor="#9acd32">
 						<th> #</th>
@@ -30,7 +30,7 @@
 
 	<xsl:template match="network">
 		<xsl:apply-templates select="./*/*">
-		<xsl:sort select="type" />
+			<xsl:sort select="type" />
 
 		</xsl:apply-templates>
 
