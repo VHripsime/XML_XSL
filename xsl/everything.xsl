@@ -16,7 +16,7 @@
 						<th>Software</th>
 					</tr>
 					<xsl:apply-templates
-						select="equipment/computers" />
+						select="equipment/computers/computer" />
 
 				</table>
 				<br />
@@ -34,22 +34,11 @@
 					</tr>
 
 					<xsl:apply-templates
-						select="equipment/peripherals" />
+						select="equipment/peripherals/*/*" />
 
 				</table>
 			</body>
 		</html>
-	</xsl:template>
-
-
-	<xsl:template match='computers'>
-		<xsl:apply-templates select="./*">
-		</xsl:apply-templates>
-	</xsl:template>
-
-	<xsl:template match='peripherals'>
-		<xsl:apply-templates select="./*/*">
-		</xsl:apply-templates>
 	</xsl:template>
 
 	<xsl:template match='computer'>
@@ -68,20 +57,20 @@
 
 			<td>
 				<p>
-					<xsl:value-of select="*/cpu/@type" />
+					<xsl:value-of select="hardware/cpu/@type" />
 					&#160;
-					<xsl:value-of select="*/cpu/@mhzclock" />
+					<xsl:value-of select="hardware/cpu/@mhzclock" />
 				</p>
 				<p>
-					<xsl:value-of select="*/ram/@amount" />
+					<xsl:value-of select="hardware/ram/@amount" />
 					&#160;
-					<xsl:value-of select="*/ram/@type" />
+					<xsl:value-of select="hardware/ram/@type" />
 				</p>
 				<p>
-					<xsl:value-of select="*/soundcard" />
+					<xsl:value-of select="hardware/soundcard" />
 				</p>
 				<p>
-					<xsl:value-of select="*/storage/@space" />
+					<xsl:value-of select="hardware/storage/@space" />
 				</p>
 
 				<p>
@@ -98,7 +87,7 @@
 		</tr>
 	</xsl:template>
 
-	<xsl:template match='*/drives/drive'>
+	<xsl:template match='hardware/drives/drive'>
 		<p>
 			<xsl:value-of select="@type" />
 			&#160;
@@ -146,6 +135,6 @@
 				<xsl:value-of select="location" />
 			</td>
 		</tr>
-		
+
 	</xsl:template>
 </xsl:stylesheet>

@@ -4,38 +4,31 @@
 
 	<xsl:template match="/">
 		<html>
-			<body>		
+			<body>
 				<h2>Computers</h2>
 				<xsl:apply-templates
-					select="equipment/computers" />
+					select="equipment/computers/computer" />
 			</body>
 		</html>
 	</xsl:template>
 
-
-	<xsl:template match='computers'>
-		<xsl:apply-templates select="computer">
-		</xsl:apply-templates>
-	</xsl:template>
-
-
-
 	<xsl:template match='computer'>
-		<xsl:if test="*/*/title='Windows NT Server 4.0'">
+		<xsl:if
+			test="software/item[@type='os']/title='Windows NT Server 4.0'">
 			<br />
 			Name:
 			<xsl:value-of select="@networkname" />
 			<br />
 
 			OS:
-			<xsl:value-of select="*/*/title" />
+			<xsl:value-of select="software/item/title" />
 			<br />
 
 			Service pack installed:
 			<xsl:choose>
-				<xsl:when test="*/*/servicepacks">
+				<xsl:when test="software/item/servicepacks">
 					<xsl:value-of
-						select="*/*/servicepacks/*[last()]/@name" />
+						select="software/item/servicepacks/servicepack[last()]/@name" />
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:text>Not installed</xsl:text>
@@ -45,7 +38,7 @@
 
 			CDROM drive:
 			<xsl:choose>
-				<xsl:when test="*/*/drive/@type='cd'">
+				<xsl:when test="hardware/drives/drive/@type='cd'">
 					Yes
 				</xsl:when>
 				<xsl:otherwise>
