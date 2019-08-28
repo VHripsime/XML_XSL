@@ -140,7 +140,7 @@
 		<commutators>
 			<commutator>
 				<type>Cisco Catalyst 600</type>
-				<port>24</port>
+				<port>4</port>
 				<location>4th floor</location>
 			</commutator>
 		</commutators>
