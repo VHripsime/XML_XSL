@@ -14,32 +14,34 @@
 						<th>Location</th>
 					</tr>
 					<xsl:apply-templates select="equipment/network" />
+					<xsl:apply-templates select="type">
+						<xsl:sort select="type" />
+					</xsl:apply-templates>
+
 				</table>
 			</body>
 		</html>
 	</xsl:template>
 
 	<xsl:template match="network/*/*">
- 
 		<tr>
 			<td>
 				<xsl:number format="1" />
 			</td>
-			
-		
+
 			<td>
 				<xsl:value-of select="type" />
 			</td>
-		    
+
 			<td>
 				<xsl:value-of select="name(.)" />
 			</td>
 			<td>
 				<xsl:value-of select="port" />
 			</td>
-			
+
 			<xsl:choose>
-				<xsl:when test="//ip">
+				<xsl:when test="ip">
 					<td>
 						<xsl:value-of select="ip" />
 					</td>
@@ -51,9 +53,9 @@
 			<td>
 				<xsl:value-of select="location" />
 			</td>
-			
+
 		</tr>
-		
+
 	</xsl:template>
 
 

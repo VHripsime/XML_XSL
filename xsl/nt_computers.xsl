@@ -10,22 +10,33 @@
 		</html>
 	</xsl:template>
 
-	<xsl:template match="computers/*">
-		<p>
-			Networkname:
-			<xsl:value-of select="@networkname" />
-		</p>
-
-		<xsl:if test="//title = 'Windows NT Server 4.0'">
+	<xsl:template match="computers/computer">
+		<xsl:if
+			test="software/item[@type='os']/title = 'Windows NT Server 4.0'">
+			<p>
+				Networkname:
+				<xsl:value-of select="@networkname" />
+			</p>
 			<p>
 				OS:
-				<xsl:value-of select="//item[@type='os']/title" />
+				<xsl:value-of select="software/item[@type='os']/title" />
 			</p>
 
 			<p>
 				Service pack installed:
-				<xsl:value-of select="//@name" />
+				<xsl:value-of
+					select="software/item[@type='os']/servicepacks/servicepack/@name" />
 			</p>
+
+			<xsl:choose>
+				<xsl:when test="hardware/drives/drive/@type='cd'">
+					<p>CDROM drive: yes</p>
+				</xsl:when>
+				<xsl:otherwise>
+					<p>CDROM drive: no</p>
+				</xsl:otherwise>
+			</xsl:choose>
+
 		</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>
