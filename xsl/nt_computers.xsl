@@ -17,6 +17,7 @@
 				Networkname:
 				<xsl:value-of select="@networkname" />
 			</p>
+			
 			<p>
 				OS:
 				<xsl:value-of select="software/item[@type='os']/title" />
