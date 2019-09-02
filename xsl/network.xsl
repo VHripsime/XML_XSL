@@ -4,9 +4,10 @@
 	<xsl:template match="/">
 		<html>
 			<body>
+			<h1>Network</h1>
 				<table border="1">
 					<tr bgcolor="#ac5353">
-						<th>Number</th>
+						<th>#</th>
 						<th>Name</th>
 						<th>Equipment type</th>
 						<th>Port number</th>

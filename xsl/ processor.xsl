@@ -21,7 +21,7 @@
 
 					<tr>
 						<td>2</td>
-						<td>Pentium2</td>
+						<td>Pentium3</td>
 						<td><xsl:value-of select="count(//cpu[@type = 'Pentium3'])" />
 						</td>
 					</tr>
@@ -29,7 +29,7 @@
 					<tr>
 						<td>3</td>
 						<td>Other types</td>
-						<td><xsl:value-of select="count(//cpu[@type != 'Pentium2'] | //cpu[@type != 'Pentium3'])" />
+						<td><xsl:value-of select="count(//cpu[@type = 'Pentium4'])" />
 						</td>
 					</tr>
 					
