@@ -110,14 +110,22 @@
 
 	</xsl:template>
 
+
 	<xsl:template match="peripherals/*/*">
 		<tr>
 			<td>
 				<xsl:number format="1" />
 			</td>
-			<td>
-				N/A
-			</td>
+			<xsl:choose>
+				<xsl:when test="@networkname">
+					<td>
+						<xsl:value-of select="@networkname" />
+					</td>
+				</xsl:when>
+				<xsl:otherwise>
+					<td>N/A</td>
+				</xsl:otherwise>
+			</xsl:choose>
 			<td>
 				<xsl:value-of select="type" />
 			</td>
