@@ -33,12 +33,12 @@
 					<xsl:apply-templates
 						select="equipment/peripherals" />
 				</table>
-
 			</body>
 		</html>
 	</xsl:template>
 
-	<xsl:template match="computers/*">
+	<!-- Computers -->
+	<xsl:template match="computers/computer">
 		<tr>
 			<td>
 				<xsl:number format="1" />
@@ -53,14 +53,57 @@
 			</td>
 
 			<td>
-				<xsl:value-of select="hardware/cpu/@type" />
+				MHZ:
+				<xsl:value-of select="hardware/cpu/@mhzclock" />
+				<br />
+				RAM:
+				<xsl:value-of select="hardware/ram/@amount" />
+				<br />
+				Storage:
+				<xsl:value-of select="hardware/storage/@space" />
+				<br />
+				<xsl:if test="hardware/drives/drive[@type = 'floppy']">
+					Floppy:Yes
+					<br />
+				</xsl:if>
+
+				<xsl:if test="hardware/drives/drive[@type = 'cd']">
+					CD:Yes
+					<br />
+				</xsl:if>
+
+				<xsl:if test="hardware/soundcard">
+					SoundCard:
+					<xsl:value-of select="hardware/soundcard" />
+				</xsl:if>
 			</td>
+			
 			<td>
-				<xsl:value-of select="software/item[1]/title" />
-				,
-				<xsl:value-of select="software/item[2]/title" />
-				,
-				<xsl:value-of select="software/item[3]/title" />
+				<xsl:if test="software/item[@type='os']">
+				OS:<xsl:value-of select="software/item[@type='os']/title" />
+				<br />
+				</xsl:if>
+				
+				<xsl:if test="software/item[@type='antivirus']">
+				Antivirus:<xsl:value-of select="software/item[@type='antivirus']/title" />
+				<br />
+				</xsl:if>
+				
+				<xsl:if test="software/item[@type='development']">
+				Development:<xsl:value-of select="software/item[@type='development']/title" />
+				<br />
+				</xsl:if>
+				
+				<xsl:if test="software/item[@type='rational']">
+				Rational:<xsl:value-of select="software/item[@type='rational']/title" />
+				<br />
+				</xsl:if>
+				
+				<xsl:if test="software/item[@type='db']">
+				DB:<xsl:value-of select="software/item[@type='db']/title" />
+				<br />
+				</xsl:if>
+			
 
 			</td>
 		</tr>
