@@ -146,7 +146,7 @@
 		</commutators>
 		<routers>
 			<router>
-				<type>Cisco Catalyst 900</type>
+				<type>Aisco Catalyst 900</type>
 				<ip>192.168.0.15</ip>
 				<location>4th floor</location>
 			</router>
