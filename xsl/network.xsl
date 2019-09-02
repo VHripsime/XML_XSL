@@ -5,8 +5,9 @@
 	<xsl:template match="/">
 		<html>
 			<body>
-				<table border="1" font-family="arial, sans-serif;"
-					border-collapse="collapse;" width="100%;" height="50%;">
+				<table align="center" border="1"
+					font-family="arial, sans-serif;" border-collapse="collapse;"
+					width="50%;" height="50%;">
 					<tr bgcolor="#9acd32">
 
 						<th>Name</th>
@@ -23,48 +24,48 @@
 	</xsl:template>
 
 	<xsl:template match="equipment">
-		
+
 		<xsl:apply-templates select="network" />
-	
+
 	</xsl:template>
 
 	<xsl:template match="network/*/*">
 		<tr>
-			
+
 			<td>
 				<xsl:value-of select="type" />
 			</td>
-			
+
 			<td>
 				<xsl:value-of select="name(.)" />
 			</td>
-			
+
 			<td>
 				<xsl:value-of select="port" />
 			</td>
-			
+
 			<td>
-				
+
 				<xsl:choose>
-					
+
 					<xsl:when test="ip">
 						<xsl:value-of select="ip" />
 					</xsl:when>
-					
+
 					<xsl:otherwise>
 						<p>N/A</p>
 					</xsl:otherwise>
-				
+
 				</xsl:choose>
-			
+
 			</td>
-			
+
 			<td>
 				<xsl:value-of select="location" />
 			</td>
-			
+
 		</tr>
-	
+
 	</xsl:template>
 
 </xsl:stylesheet>

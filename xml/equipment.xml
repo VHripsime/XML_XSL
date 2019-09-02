@@ -35,7 +35,7 @@
 		</computer>
 		<computer type="desktop" networkname="BLUE">
 			<hardware>
-				<cpu type="Pentium2" mhzclock="350"/>
+				<cpu type="Pentium2" mhzclock="350"></cpu>
 				<ram amount="64" type="SDRAM"/>
 				<storage space="5G"/>
 				<drives>
