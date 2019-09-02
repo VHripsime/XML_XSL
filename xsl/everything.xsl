@@ -11,6 +11,7 @@
 			width="50%;" height="50%;">
 
 			<tr bgcolor="#9acd32">
+				<th>#</th>
 				<th>Name</th>
 				<th>Type</th>
 				<th>Hardware</th>
@@ -41,6 +42,7 @@
 	</xsl:template>
 
 	<xsl:template match="computer">
+
 		<tr>
 			<td>
 				<xsl:value-of select="@networkname" />
@@ -49,13 +51,53 @@
 				<xsl:value-of select="@type" />
 			</td>
 			<td>
-				<xsl:value-of select="count(hardware/*)" />
+				<xsl:apply-templates select="hardware/*" />
 			</td>
 			<td>
-				<xsl:value-of select="count(software/*)" />
+				<xsl:apply-templates select="software/*" />
 			</td>
+
+
 		</tr>
+
 	</xsl:template>
+
+	<xsl:template match="software/*">
+		<xsl:if test="title">
+			title:
+			<xsl:value-of select="title" />
+			<br />
+		</xsl:if>
+		<xsl:if test="vendor">
+			vendor:
+			<xsl:value-of select="vendor" />
+			<br />
+		</xsl:if>
+		<xsl:if test="version">
+			version:
+			<xsl:value-of select="version" />
+			<br />
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match=" hardware/*">
+		<xsl:if test=" @mhzclock ">
+			MHZ:
+			<xsl:value-of select="@mhzclock" />
+			<br />
+		</xsl:if>
+		<xsl:if test="@type">
+			Type:
+			<xsl:value-of select="@type" />
+			<br />
+		</xsl:if>
+		<xsl:if test="@space">
+			Space:
+			<xsl:value-of select="@space" />
+			<br />
+		</xsl:if>
+	</xsl:template>
+
 	<xsl:template match="peripherals/*/*">
 		<tr>
 			<td>
