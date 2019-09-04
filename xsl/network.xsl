@@ -5,13 +5,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:template match="/">
  <html>
   <body>
-  <h2>Networks</h2>
-  
-      <xsl:template match="equipment/network"/>
-        <xsl:apply-templates>
-            <xsl:sort select="type" order="ascending"/>
-                </xsl:apply-templates>
-                
+  <h2>Networks</h2>     
   <table border="1">
     <tr bgcolor="#9acd32">
       <th>#2</th>
@@ -22,13 +16,13 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       <th>Location</th>
     </tr>
     <xsl:apply-templates select="equipment/network"/>
-
   </table>
   </body>
   </html>
 </xsl:template>
 
 <xsl:template match="network/*/*">
+
     <tr>
     <td><xsl:number format="1"/></td>
     <td><xsl:value-of select="type"/></td>
@@ -39,7 +33,6 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     </tr>
     
 </xsl:template>
-
 </xsl:stylesheet>
 
 

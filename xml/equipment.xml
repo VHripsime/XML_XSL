@@ -118,7 +118,7 @@
 					<vendor>Microsoft</vendor>
 					<version>7.0</version>
 					<servicepacks>
-						<servicepack name="SP2"/>
+						<servicepack name="SP2"></servicepack>
 					</servicepacks>
 				</item>
 			</software>
