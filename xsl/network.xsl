@@ -15,6 +15,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       <th>IP address</th>
       <th>Location</th>
     </tr>
+
+      <xsl:sort select="artist"/>
     <xsl:apply-templates select="equipment/network"/>
   </table>
   </body>
@@ -22,7 +24,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 </xsl:template>
 
 <xsl:template match="network/*/*">
-
+      <xsl:for-each select="type">
+      <xsl:sort select="type"/>
     <tr>
     <td><xsl:number format="1"/></td>
     <td><xsl:value-of select="type"/></td>
@@ -31,7 +34,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <td><xsl:value-of select="ip"/></td>
     <td><xsl:value-of select="location"/></td>
     </tr>
-    
+    </xsl:for-each>
 </xsl:template>
 </xsl:stylesheet>
 
