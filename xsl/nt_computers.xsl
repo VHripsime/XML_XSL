@@ -6,10 +6,16 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <html>
     <body>
       <h2>NT_Computers</h2>
-      <xsl:for-each select="equipment/computers/computer">
+   <xsl:apply-templates select="equipment/computers"/>
+      
+         </body>
+  </html>
+    </xsl:template>
+     
+       <xsl:template match="computer">
       
         <xsl:if test="software/item[@type='os']/title = 'Windows NT Server 4.0'">
-          <ul>
+       <ul>
           
             <li>
               <p>Name:<xsl:value-of select="@networkname"/></p>
@@ -19,37 +25,49 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
               <p>OS: <xsl:value-of select="software/item/title"/></p>
             </li>
             
-            <li>
-              <xsl:for-each select="software/item/servicepacks/servicepack">
-                <xsl:choose>
-                <xsl:when test="servicepack = ''">
-                  <p>Not installed</p>
-                </xsl:when>
-                <xsl:otherwise>
-                  <p>Service pack installed: <xsl:value-of select="@name"/></p>
-                </xsl:otherwise>
-              </xsl:choose>
-              </xsl:for-each>  
+            
+             <li>
+              <xsl:apply-templates select="software"/>                
             </li>
             
             <li>
-              <xsl:for-each select="hardware/drives/drive">
-                <xsl:choose>
-                <xsl:when test="@type != 'cd'">
-                  <p>NO</p>
-                </xsl:when>
-                <xsl:otherwise>
-                  <p>YES</p>
-                </xsl:otherwise>
-              </xsl:choose>
-              </xsl:for-each>     
+              
+                <xsl:apply-templates select="hardware/drives"/>      
+               
             </li>
           
           </ul>
-        </xsl:if> 
-          </xsl:for-each> 
-    </body>
-  </html>
+            </xsl:if>
+      </xsl:template>
+       
+    <xsl:template match="item">
+      <xsl:choose>
+                <xsl:when test="servicepacks/servicepack = ''">
+                  <p>Not installed</p>
+                </xsl:when>
+                <xsl:otherwise>
+                  <p>Service pack installed: <xsl:value-of select="servicepacks/servicepack/@name"/></p>
+                </xsl:otherwise>
+              </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="drive">
+      <xsl:choose>
+                <xsl:when test="@type != 'cd'">
+                  <p>CDROM drive: NO</p>
+                </xsl:when>
+                <xsl:otherwise>
+                  <p>CDROM drive: YES</p>
+                </xsl:otherwise>
+              </xsl:choose>
+    </xsl:template>
 
-</xsl:template>
 </xsl:stylesheet>
+
+
+
+              
+              
+              
+              
+    
