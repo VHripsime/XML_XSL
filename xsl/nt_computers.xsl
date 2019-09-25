@@ -30,10 +30,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
               <xsl:apply-templates select="software"/>                
             </li>
             
-            <li>
-              
-                <xsl:apply-templates select="hardware/drives"/>      
-               
+            <li>             
+              <p>CDROM drive: <xsl:apply-templates select="hardware/drives"/></p>               
             </li>
           
           </ul>
@@ -41,27 +39,36 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       </xsl:template>
        
     <xsl:template match="item">
-      <xsl:choose>
-                <xsl:when test="servicepacks/servicepack = ''">
-                  <p>Not installed</p>
-                </xsl:when>
-                <xsl:otherwise>
-                  <p>Service pack installed: <xsl:value-of select="servicepacks/servicepack/@name"/></p>
-                </xsl:otherwise>
-              </xsl:choose>
-    </xsl:template>
+      <xsl:if test="@type = 'os'">
+        <xsl:apply-templates select="servicepacks"/>
+      </xsl:if>
+            </xsl:template>
     
     <xsl:template match="drive">
-      <xsl:choose>
-                <xsl:when test="@type != 'cd'">
+       <xsl:if test="@type = 'cd'">YES</xsl:if> 
+     
+              <!-- <xsl:choose>
+                <xsl:when test="drive/@type != 'cd'">
                   <p>CDROM drive: NO</p>
                 </xsl:when>
                 <xsl:otherwise>
                   <p>CDROM drive: YES</p>
                 </xsl:otherwise>
-              </xsl:choose>
+              </xsl:choose> -->
     </xsl:template>
-
+    
+    <xsl:template match="servicepack">
+      <xsl:choose>
+                <xsl:when test="@name = ''">
+                  <p>Not installed</p>
+                </xsl:when>
+                <xsl:otherwise>
+                  <p>Service pack installed: <xsl:value-of select="@name"/></p>
+                </xsl:otherwise>
+        </xsl:choose>
+      
+    </xsl:template>
+   
 </xsl:stylesheet>
 
 
